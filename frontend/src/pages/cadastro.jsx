@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Logo from "./Logo.png";
 
 function Cadastro() {
-  const [nome, setNome] = React.useState("");
+  const [username, setUsername] = React.useState("");
+  const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [role, setRole] = React.useState("USER");
@@ -19,14 +20,14 @@ function Cadastro() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ nome, email, password, role }),
+        body: JSON.stringify({ username, name, email, password, role }),
       });
 
       if (!resposta.ok) throw new Error("Erro no cadastro");
 
       const dados = await resposta.json();
       alert(dados.mensagem || "Cadastro realizado com sucesso!");
-      navigate("/"); // ✅ Redireciona para home
+      navigate("/home"); // Redireciona para a página home após o cadastro
     } catch (erro) {
       console.error("Erro ao cadastrar:", erro);
       alert("Erro ao cadastrar. Verifique o console.");
@@ -52,10 +53,19 @@ function Cadastro() {
         <div>
           <input
             type="text"
-            placeholder="Nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            placeholder="Usuário"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className="w-full px-5 py-3 text-lg border-2 border-gray-200 rounded-xl mb-5"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Nome"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full px-5 py-3 text-lg border-2 border-gray-200 rounded-xl mb-5"
+            required
           />
           <input
             type="email"
@@ -63,6 +73,7 @@ function Cadastro() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full px-5 py-3 text-lg border-2 border-gray-200 rounded-xl mb-5"
+            required
           />
           <input
             type="password"
@@ -70,6 +81,9 @@ function Cadastro() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full px-5 py-3 text-lg border-2 border-gray-200 rounded-xl mb-5"
+            required
+            minLength={8}
+            maxLength={14}
           />
           <input
             type="text"
