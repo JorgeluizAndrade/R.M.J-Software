@@ -1,19 +1,20 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Cadastro from "/src/pages/Cadastro";
+// src/App.jsx
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import Cadastro from "./pages/Cadastro";
 import "./App.css";
 
 function App() {
   return (
     <Router>
       <div>
-        <h1>Vite + React</h1>
+        <h1>Bem vindo a livraria</h1>
         <nav>
           <ul>
             <li>
-              <a href="/">Home</a>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <a href="/cadastro">Cadastro</a>
+              <Link to="/cadastro">Cadastro</Link>
             </li>
           </ul>
         </nav>
